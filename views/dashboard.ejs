@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Dashboard</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+    }
+    .sidebar {
+      background-color: #000000;
+      height: 100vh;
+      padding: 20px;
+    }
+    .sidebar h5 {
+      color: #b3b3b3;
+    }
+    .sidebar a {
+      color: #b3b3b3;
+      display: block;
+      padding: 10px 0;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      color: white;
+    }
+    .main-content {
+      background-color: #181818;
+      padding: 20px;
+    }
+    .playlist-card {
+      background-color: #282828;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .play-button {
+      background-color: #1DB954;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      color: white;
+      font-size: 16px;
+    }
+    .bottom-controls {
+      background-color: #282828;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    .navbar {
+      background-color: #000;
+      padding: 10px 20px;
+    }
+    .navbar-brand {
+      color: white;
+      font-weight: bold;
+    }
+    .navbar-brand:hover {
+      color: #1DB954;
+    }
+    .navbar .form-control {
+      background-color: #333;
+      border: none;
+      color: white;
+      width: 300px;
+    }
+    .navbar .form-control:focus {
+      background-color: #444;
+      border: none;
+      color: white;
+    }
+    .navbar-nav .nav-link {
+      color: white;
+      margin-right: 15px;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #1DB954;
+    }
+    .spotify-card {
+      background-color: #121212;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+    }
+    #songs-list div {
+      background: #fff;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+    audio {
+      margin-top: 10px;
+      width: 100%;
+    }
+    h1, h2 {
+      color: #1db954;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="d-flex">
+    <div class="sidebar">
+      <h5>Your Library</h5>
+      <a href="#">Playlists</a>
+      <a href="#">Liked Songs</a>
+      <a href="#">Recents</a>
+      <h2>Playlists</h2>
+      <ul id="playlist"></ul>
+      <input type="text" id="playlistName" placeholder="New Playlist Name" class="form-control mb-2">
+      <button class="btn btn-success w-100" onclick="addPlaylist()">Add Playlist</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content w-100">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a href="#" class="navbar-brand">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify Logo" style="width: 150px;">
+        </a>
+        <form class="form-inline mx-auto">
+          <input type="text" class="form-control" id="search-input" placeholder="Search by title, artist, or album">
+          <button id="search-button" class="btn btn-success ml-2" type="button">Search</button>
+        </form>
+      </nav>
+
+      <!-- Playlists and Songs -->
+      <div class="spotify-card text-center">
+        <h2 id="playlistname">All Songs</h2>
+        <ul id="songs" class="list-unstyled">
+          <li><input type="checkbox" name="song" value="song1"><a onclick="playSong('song1.mp3')"> Song 1 - Artist 1</a></li>
+          <li><input type="checkbox" name="song" value="song2"><a onclick="playSong('song2.mp3')"> Song 2 - Artist 2</a></li>
+          <li><input type="checkbox" name="song" value="song3"><a onclick="playSong('song3.mp3')"> Song 3 - Artist 3</a></li>
+          <li><input type="checkbox" name="song" value="song4"/><a onclick="playSong('song4.mp3')">Song 4 - Artist 4</a></li>
+          <li><input type="checkbox" name="song" value="song5"/><a onclick="playSong('song5.mp3')">Song 5 - Artist 5</a></li>
+          <li><input type="checkbox" name="song" value="song6"/><a onclick="playSong('song6.mp3')">Song 6 - Artist 6</a></li>
+        </ul>
+      </div>
+
+      <!-- Music Player -->
+      <div class="fixed-bottom bg-dark p-2">
+        <audio id="audioPlayer" controls class="w-100">
+          <source id="audioSource" src="https://www.youtube.com/watch?v=ft9NRmYXQHM" type="audio/mp3">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Search functionality
+    document.getElementById('search-button').addEventListener('click', function() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const songListItems = document.querySelectorAll('#songs li');
+      
+      songListItems.forEach(function(songItem) {
+        const songText = songItem.textContent.toLowerCase();
+        if (songText.includes(searchTerm)) {
+          songItem.style.display = '';
+        } else {
+          songItem.style.display = 'none';
+        }
+      });
+    });
+
+    // Function to play a selected song
+    function playSong(song) {
+      var audioPlayer = document.getElementById('audioPlayer');
+      var audioSource = document.getElementById('audioSource');
+      audioSource.src = 'music/' + song;
+      audioPlayer.load();
+      audioPlayer.play();
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

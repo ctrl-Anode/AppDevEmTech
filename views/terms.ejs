@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin-top: 50px;
+    }
+
+    .form-control {
+      background-color: #3E3E3E;
+      color: white;
+    }
+
+    .btn-custom {
+      background-color: #1ED760;
+      color: white;
+      border: none;
+    }
+
+    .btn-social {
+      background-color: #282828;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .btn-social:hover {
+      background-color: #3E3E3E;
+    }
+
+    .footer-link {
+      color: #B3B3B3;
+    }
+
+    .card {
+      max-width: 500px;
+      margin: auto;
+      border: none;
+    }
+
+    .form-check-label a {
+      color: #1db954;
+      /* Spotify green color */
+    }
+
+    .btn-success {
+      background-color: #1db954;
+      border: none;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #1db954;
+    }
+
+    .text-success {
+      color: #1db954 !important;
+    }
+
+    .form-check-input:checked {
+      background-color: #1db954;
+      border-color: #1db954;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container text-center">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify Logo" style="width: 150px;">
+    <h3 class="mt-4">Sign up to start listening</h3>
+
+    <form action="/login">
+      <div class="container mt-5">
+        <div class="card bg-dark">
+          <div class="card-body">
+            <h5 class="text-light">Spotify</h5>
+            <h3 class="card-text mb-4">Terms & Conditions</h3>
+
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" id="optOutMarketing"required>
+              <label class="form-check-label" for="optOutMarketing">I would prefer not to receive marketing messages from Spotify</label>
+            </div>
+
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" id="shareData"required>
+              <label class="form-check-label" for="shareData">Share my registration data with Spotify's content providers for marketing purposes.</label>
+            </div>
+
+            <div class="form-check mb-4">
+              <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+              <label class="form-check-label" for="agreeTerms">
+                I agree to the <a href="#" class="text-success">Spotify Terms and Conditions of Use</a> and <a href="#" class="text-success">Privacy Policy</a>.
+              </label>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Sign up</button>
+          </div>
+        </div>
+      </div>
+
+            <hr class="my-3 text-light">
+
+    <!-- Footer -->
+    <div class="mt-4">
+      <p>Already have an account? <a href="/login" class="text-success">Log in here</a></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

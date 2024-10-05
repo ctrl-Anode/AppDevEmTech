@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Spotify Page</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Bootstrap CSS v5.3.2 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+        
+        <style>
+            body, html {
+                height: 100%;
+                margin: 0;
+                background-color: #121212; /* Dark background similar to Spotify theme */
+            }
+
+            .spotify-logo {
+                width: 120px;
+            }
+
+            .spotify-card {
+                background-color: #121212;
+                border-radius: 0; /* Remove border radius for full-screen effect */
+                height: 100vh;
+                width: 100vw;
+            }
+
+            .btn-success {
+                background-color: #1db954;
+                border: none;
+            }
+
+            .btn-success:hover {
+                background-color: #14833b;
+            }
+
+            a {
+                color: white;
+            }
+
+            a:hover {
+                text-decoration: underline;
+                color: #f0f0f0;
+            }
+
+            .small {
+                color: #ccc;
+            }
+
+            .small:hover {
+                color: #fff;
+            }
+
+            .navbar {
+                background-color: #000;
+            }
+
+            .navbar-nav .nav-link {
+                color: white !important;
+            }
+
+            .navbar-nav .nav-link:hover {
+                color: #1db954 !important;
+            }
+
+
+        
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #121212;
+                    color: #333;
+                    margin: 0;
+                    padding: 20px;
+                }
+                h1, h2 {
+                    color: #1db954; /* green color */
+                }
+                form {
+                    background: #121212;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 20px;
+                }
+                input[type="text"], input[type="file"] {
+                    width: calc(100% - 22px);
+                    padding: 10px;
+                    margin: 10px 0;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+                button {
+                    background-color: #1db954;
+                    color: white;
+                    padding: 10px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                button:hover {
+                    background-color: #1aa34a;
+                }
+                #songs-list div {
+                    background: #fff;
+                    padding: 15px;
+                    margin: 10px 0;
+                    border-radius: 5px;
+                    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+                }
+                audio {
+                    margin-top: 10px;
+                    width: 100%;
+                }
+                label {
+                    display: block;
+                    text-align: left; /* Ensure text-align is left */
+                    margin-bottom: 5px;
+                    color: #1db954;
+                  }
+                  .container {
+                    max-width: 500px;
+                    margin-top: 10px;}
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <!-- Spotify Logo -->
+                    <a class="navbar-brand" href="#">
+                        <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png" alt="Spotify" class="spotify-logo">
+                    </a>
+            
+                    <!-- Collapsible section -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <!-- Search Functionality -->
+                        <div class="d-flex align-items-center ms-auto">
+                            <h5 class="text-white me-3 mb-0">Search Songs</h5>
+                            <input type="text" id="search-input" class="form-control me-2" placeholder="Search by title, artist, or album">
+                            <button id="search-button" class="btn btn-success">Search</button>
+                        </div>
+                        <!-- Nav Links -->
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/usong">Uploaded Songs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+        </header>
+
+        <main>
+            <div class="container text-center">
+                <form action="/songupload" method="POST" enctype="multipart/form-data">
+              <div class="container mt-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify Logo" style="width: 150px;">
+                <div class="card bg-dark border-0">
+                  <div class="card-body">
+                    <form>
+                        <label for="title">Title</label>
+                        <input type="text" name="title" class="form-control" id="title" placeholder="Song Title" required>
+
+                        <label for="artist">Artist</label>
+                        <input type="text" name="artist" class="form-control" id="artist" placeholder="Artist" required>
+
+                        <label for="album">Album</label>
+                        <input type="text" name="album" class="form-control" id="album" placeholder="Album" required>
+
+                        <label for="genre">Genre</label>
+                        <input type="text" name="genre" class="form-control" id="genre" placeholder="Genre" required>
+
+                        <label for="file">File</label>
+                        <input type="file" name="file" class="form-control" id="file" placeholder="File" required><br>
+
+                        <button type="submit" value="songuplaod" class="btn btn-success btn-sm mb-3">Upload Song</button>
+                    </form>
+
+                  </form>
+                  </div>
+                 </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <!-- Footer content -->
+        </footer>
+
+        <!-- Bootstrap JavaScript Libraries -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>
